@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  talker:
+    image: ros:${TALKER_ROS_DISTRO}
+    volumes:
+      - .:/code/.
+    network_mode:
+      host
+    command: timeout 8 python3 /code/main.py
+  listener:
+    image: ros:${LISTENER_ROS_DISTRO}
+    network_mode:
+      host
+    command: timeout 8 ros2 topic echo /topic
